@@ -1,0 +1,41 @@
+{
+  "/products/night-tee.jpg": {
+    "mask": "/products/white/night-mask.svg"
+  },
+  "/products/dream-tee.jpg": {
+    "mask": "/products/white/dream-mask.svg"
+  },
+  "/products/skull-tank.png": {
+    "mask": "/products/white/hustle-mask.svg"
+  },
+  "/products/crest-cap.jpg": {
+    "mask": "/products/white/crest-mask.svg"
+  },
+  "/products/utility-cargo-back.png": {
+    "mask": "/products/white/cargo-back-mask.svg"
+  },
+  "/products/red-camo-back.png": {
+    "mask": "/products/white/red-camo-back-mask.svg"
+  },
+  "/products/snapback-black-front.png": {
+    "source": "/products/white/snapback-black-front-cutout.png"
+  },
+  "/products/snapback-black-back.png": {
+    "source": "/products/white/snapback-black-back-cutout.png"
+  },
+  "/products/snapback-red-front.png": {
+    "source": "/products/white/snapback-red-front-cutout.png"
+  },
+  "/products/snapback-red-back.png": {
+    "source": "/products/white/snapback-red-back-cutout.png"
+  },
+  "/SL_Originals_images/ChatGPT%20Image%20Jan%2025%2C%202026%2C%2003_25_48%20PM.png": {
+    "mask": "/products/white/property-caps-mask.svg"
+  },
+  "/SL_Originals_images/Men's%20Autumn_Winter%20Hooded%20Jacket%20Set%2C%20Two-Tone%20Patchwork%2C%20Loose%20Fit%2C%20Zip-Up%20Front%2C%20Letter%20Print%20Mens%20Two%20Piece%20Set%20Mens%20Co%20Ord%20Set%20Men%20Two%20Piece%20Set%20Brown%20Mens%202%20Piece%20Outfits%20Brown%20Mens%20Jogging%20Set.jpg": {
+    "mask": "/products/white/contrast-panel-mask.svg"
+  },
+  "/products/utility-cargo-front.png": {
+    "source": "/products/cargo.png"
+  }
+}
