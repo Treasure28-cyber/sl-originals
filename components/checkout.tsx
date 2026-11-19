@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import {shopImage} from '@/lib/shop-images';
 import {Suspense,useEffect,useState} from 'react';
 import {useSearchParams} from 'next/navigation';
 import {CreditCard,MessageCircle,LockKeyhole,ShoppingBag,Check,ChevronLeft} from 'lucide-react';
@@ -55,7 +56,7 @@ function CheckoutBody({paystackEnabled,whatsappNumber}:Props){
     </section>
    </form>
    <aside className="order-summary checkout-summary"><div className="checkout-summary-title"><h2>Your originals</h2><span>{cart.items.reduce((n,x)=>n+x.quantity,0)} items</span></div>
-    {cart.items.map(x=><div className="checkout-product" key={`${x.product.id}-${x.size}-${x.color}`}><div className="checkout-product-image"><img src={x.product.front||x.product.mockup} alt={x.product.name}/><span>{x.quantity}</span></div><div><h3>{x.product.name}</h3><p>{x.size} / {colourName(x.color)}</p></div><strong>{money(x.quantity*x.product.price)}</strong></div>)}
+    {cart.items.map(x=><div className="checkout-product" key={`${x.product.id}-${x.size}-${x.color}`}><div className="checkout-product-image"><img src={shopImage(x.product.front||x.product.mockup)} alt={x.product.name}/><span>{x.quantity}</span></div><div><h3>{x.product.name}</h3><p>{x.size} / {colourName(x.color)}</p></div><strong>{money(x.quantity*x.product.price)}</strong></div>)}
     <div className="checkout-totals"><div><span>Subtotal</span><strong>{money(subtotal)}</strong></div><div><span>Delivery</span><span>Confirmed before payment</span></div></div>
     <div className="checkout-subtotal"><span>Order subtotal<small>Excludes delivery</small></span><strong><small>NGN</small> {money(subtotal)}</strong></div>
     <div className="summary-assurance"><Check size={18}/><p>Original designs. Personal service.<br/>We’ll help with the finishing touches.</p></div><Link href="/shop" className="checkout-edit">Continue shopping</Link>

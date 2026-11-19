@@ -1,2 +1,2 @@
-import {InfoPage} from '@/components/store';
+import {InfoPage} from '@/components/info-page';
 export default function Page(){return <InfoPage type="about"/>}

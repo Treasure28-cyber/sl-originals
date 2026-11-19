@@ -1,3 +1,3 @@
-import {Home} from '@/components/store';
+import {Home} from '@/components/home';
 import {getProducts} from '@/lib/products';
-export default async function Page(){return <Home products={await getProducts()}/>}
+export default async function Page(){return <Home products={(await getProducts()).slice(0,4)}/>}
