@@ -31,7 +31,7 @@ function CheckoutBody({paystackEnabled,whatsappNumber}:Props){
     const name=String(form.get('name')||'').trim(),email=String(form.get('email')||'').trim(),phone=String(form.get('phone')||'').trim(),address=String(form.get('address')||'').trim(),city=String(form.get('city')||'').trim(),state=String(form.get('state')||'').trim();
     if(!name||!email||!phone||!address||!city||!state){setStatus('Please complete your contact and delivery details.');return}
     if(method==='whatsapp'){
-     if(!whatsappEnabled){setStatus('WhatsApp ordering will be available as soon as our store number is connected.');return}
+     if(!whatsappEnabled){setStatus('WhatsApp order link could not be opened. Please use the contact link in the footer.');return}
      const message=['Hello SL ORIGINALS, I’d like to place an order.','',...cart.items.map(x=>`${x.product.name} | ${x.size} | ${colourName(x.color)} | Qty ${x.quantity} | ${money(x.product.price*x.quantity)}`),'',`Subtotal: ${money(subtotal)}`,'Delivery fee: please confirm before payment.','',`Name: ${name}`,`Email: ${email}`,`Phone: ${phone}`,`Delivery: ${address}, ${city}, ${state}, Nigeria`,'','Please confirm availability, delivery cost and payment details.'].join('\n');
      window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`,'_blank','noopener,noreferrer');setStatus('Your order is ready in WhatsApp. Send the message there to confirm it with us. Your bag is saved until payment.');return;
     }
@@ -43,14 +43,14 @@ function CheckoutBody({paystackEnabled,whatsappNumber}:Props){
      <div className="form-row"><label>Email address<input name="email" type="email" required autoComplete="email" placeholder="you@example.com" maxLength={254}/></label><label>Phone number<input name="phone" type="tel" required autoComplete="tel" placeholder="+234" maxLength={30}/></label></div>
      <label>Delivery address<input name="address" required autoComplete="street-address" placeholder="House number and street" maxLength={300}/></label>
      <div className="form-row"><label>City<input name="city" required autoComplete="address-level2" placeholder="City" maxLength={100}/></label><label>State<input name="state" required autoComplete="address-level1" placeholder="State" maxLength={100}/></label></div>
-     <div className="delivery-note">Delivering in Nigeria. Delivery cost and timing are confirmed before payment.</div>
+     <div className="delivery-note">Delivery across Nigeria. Product prices, delivery cost and timing are confirmed with you before payment.</div>
     </section>
     <section className="checkout-panel"><h2>Your checkout, your choice.</h2><p>Choose how you’d like to complete your order.</p>
      <fieldset className="payment-options"><legend className="sr-only">Checkout method</legend>
       <label className={`payment-option ${method==='whatsapp'?'is-selected':''}`}><input type="radio" name="method" value="whatsapp" checked={method==='whatsapp'} onChange={()=>setMethod('whatsapp')}/><MessageCircle size={24}/><span><strong>Checkout through WhatsApp</strong><small>Confirm your order, delivery and payment with us.</small></span></label>
       <label className={`payment-option ${method==='paystack'?'is-selected':''} ${!paystackEnabled?'is-unavailable':''}`}><input type="radio" name="method" value="paystack" disabled={!paystackEnabled} checked={method==='paystack'} onChange={()=>setMethod('paystack')}/><CreditCard size={24}/><span><strong>Pay with Paystack {!paystackEnabled&&<b className="payment-badge">Coming soon</b>}</strong><small>{paystackEnabled?'Continue to Paystack’s secure payment page.':'Online payments are being set up. Choose WhatsApp to order.'}</small></span></label>
      </fieldset>
-     {!whatsappEnabled&&method==='whatsapp'&&<p className="checkout-availability">WhatsApp ordering is being connected. Please check back shortly.</p>}
+     {!whatsappEnabled&&method==='whatsapp'&&<p className="checkout-availability">WhatsApp ordering is temporarily unavailable in this browser.</p>}
      <button className="button checkout-submit" disabled={busy||(method==='whatsapp'?!whatsappEnabled:!paystackEnabled)}>{method==='whatsapp'?<MessageCircle size={19}/>:<LockKeyhole size={18}/>} {busy?'PLEASE WAIT…':method==='whatsapp'?'CONTINUE TO WHATSAPP':'CONTINUE TO PAYSTACK'}</button>
      <p className="checkout-footnote">{method==='whatsapp'?'Opens WhatsApp with your order details. Send the message to place your order.':'You’ll complete payment securely on Paystack.'}</p>
     </section>

@@ -1,0 +1,2 @@
+﻿// Add this schema only to the PRIVATE subscriber dataset's Studio.
+export const circleSubscriberSchema={name:'circleSubscriber',title:'Circle subscriber',type:'document',fields:[{name:'firstName',type:'string',title:'First name'},{name:'email',type:'string',title:'Email'},{name:'birthday',type:'string',title:'Birthday (MM-DD)'},{name:'consent',type:'boolean',title:'Marketing consent'},{name:'consentVersion',type:'string',title:'Consent copy version'},{name:'consentedAt',type:'datetime',title:'Signup date'},{name:'source',type:'string',title:'Signup source'}]};

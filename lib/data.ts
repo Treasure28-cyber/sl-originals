@@ -1,4 +1,4 @@
-export type Product = { id: string; slug: string; name: string; category: string; price: number; mockup: string; finished: string; front?: string; back?: string; gallery?: string[]; colors: string[]; sizes: string[]; description: string; badge?: string };
+export type Product = { id: string; slug: string; name: string; category: string; price: number; mockup: string; finished: string; front?: string; back?: string; gallery?: string[]; colors: string[]; sizes: string[]; description: string; badge?: string; status?: 'available'|'coming-soon' };
 // TODO: Replace sample names, prices, descriptions, sizes and availability with the approved client catalogue.
 const seeds = [
  ['night-shift','Night Shift Graphic Tee','Tees',28000,'night-tee.jpg','NEW DROP'],
@@ -14,7 +14,7 @@ export const fallbackProducts: Product[] = seeds.map(([slug,name,category,price,
 
 // TODO: Confirm these additional product names, prices and availability with the client.
 const source = (filename:string) => '/SL_Originals_images/'+encodeURIComponent(filename);
-const additionalProducts: Array<{slug:string;name:string;category:string;price:number;source:string;colors:string[];pair?:string;gallery:string[];badge?:string}> = [
+const additionalProducts: Array<{slug:string;name:string;category:string;price:number;source:string;colors:string[];pair?:string;gallery:string[];badge?:string;status?:'available'|'coming-soon'}> = [
  {slug:'rareform-white',name:'Rareform 99 White Tracksuit',category:'Sets',price:65000,source:"Group 433 (1).png",colors:['#efefeb'],pair:'rareform-white',gallery:["20260126_0441_Image Generation_remix_01kftx0p6wezq8ngb0wryyj9f6.png","Group 364.png","Group 433 (1).png","Group 433.png","task_01kftx0mhmezc938wbvcb92dhr_1769355679_img_0.webp"],badge:'SIGNATURE'},
  {slug:'ocean-camo',name:'Ocean Camo Cargo',category:'Pants',price:38000,source:"Group 297.png",colors:['#1769bb'],gallery:["Group 297.png","Group 301.png"]},
  {slug:'red-camo',name:'Red Camo Cargo',category:'Pants',price:38000,source:"SL-MK-removebg-preview.png",colors:['#b82025'],pair:'red-camo',gallery:["Group 435 (1).png","Group 435.png","SL-MK-removebg-preview.png","SL-MK.png","SL-MK3.png"]},
@@ -27,10 +27,10 @@ const additionalProducts: Array<{slug:string;name:string;category:string;price:n
  {slug:'born-to-ride-blue',name:'Born to Ride Tee - Blue',category:'Tees',price:26000,source:"WhatsApp Image 2026-01-26 at 5.44.11 AM.jpeg",colors:['#1769bb'],gallery:["WhatsApp Image 2026-01-26 at 5.44.11 AM.jpeg"]},
  {slug:'born-to-ride-white',name:'Born to Ride Tee - White',category:'Tees',price:26000,source:"WhatsApp Image 2026-01-26 at 5.44.13 AM.jpeg",colors:['#efefeb'],gallery:["WhatsApp Image 2026-01-26 at 5.44.13 AM.jpeg"]},
  {slug:'road-rules',name:'Road Rules Graphic Tee',category:'Tees',price:26000,source:"WhatsApp Image 2026-01-26 at 5.44.14 AM.jpeg",colors:['#efefeb'],gallery:["WhatsApp Image 2026-01-26 at 5.44.14 AM.jpeg"]},
- {slug:'contrast-panel',name:'Contrast Panel Tracksuit',category:'Sets',price:58000,source:"Men's Autumn_Winter Hooded Jacket Set, Two-Tone Patchwork, Loose Fit, Zip-Up Front, Letter Print Mens Two Piece Set Mens Co Ord Set Men Two Piece Set Brown Mens 2 Piece Outfits Brown Mens Jogging Set.jpg",colors:['#8a7161'],gallery:["Men's Autumn_Winter Hooded Jacket Set, Two-Tone Patchwork, Loose Fit, Zip-Up Front, Letter Print Mens Two Piece Set Mens Co Ord Set Men Two Piece Set Brown Mens 2 Piece Outfits Brown Mens Jogging Set.jpg"],badge:'STUDIO CONCEPT'}
+ {slug:'contrast-panel',name:'Contrast Panel Tracksuit',category:'Sets',price:58000,source:"Men's Autumn_Winter Hooded Jacket Set, Two-Tone Patchwork, Loose Fit, Zip-Up Front, Letter Print Mens Two Piece Set Mens Co Ord Set Men Two Piece Set Brown Mens 2 Piece Outfits Brown Mens Jogging Set.jpg",colors:['#8a7161'],gallery:["Men's Autumn_Winter Hooded Jacket Set, Two-Tone Patchwork, Loose Fit, Zip-Up Front, Letter Print Mens Two Piece Set Mens Co Ord Set Men Two Piece Set Brown Mens 2 Piece Outfits Brown Mens Jogging Set.jpg"],badge:'COMING SOON',status:'coming-soon'}
 ];
 additionalProducts.forEach(item=>{
- fallbackProducts.push({id:item.slug,slug:item.slug,name:item.name,category:item.category,price:item.price,mockup:source(item.source),finished:`/products/${item.slug}-finished.svg`,colors:item.colors,sizes:item.category==='Headwear'?['One size']:['S','M','L','XL','XXL'],description:'An SL ORIGINALS design study with a bold point of view. Preview the original artwork and available views. Product details are awaiting client confirmation.',badge:item.badge,gallery:item.gallery.map(source),...(item.pair?{front:`/products/${item.pair}-front.png`,back:`/products/${item.pair}-back.png`}:{})});
+ fallbackProducts.push({id:item.slug,slug:item.slug,name:item.name,category:item.category,price:item.price,mockup:source(item.source),finished:`/products/${item.slug}-finished.svg`,colors:item.colors,sizes:item.category==='Headwear'?['One size']:['S','M','L','XL','XXL'],description:'An SL ORIGINALS design with a bold point of view. Message us to confirm product details and availability.',badge:item.badge,status:item.status,gallery:item.gallery.map(source),...(item.pair?{front:`/products/${item.pair}-front.png`,back:`/products/${item.pair}-back.png`}:{})});
 });
 for(const product of fallbackProducts){
  const related:Record<string,string[]>={'rareform-99':["Gemini_Generated_Image_j6vurkj6vurkj6vu-removebg-preview.png","Group 356 (1).png","Group 430.png","Group 431.png"],'utility-cargo':["Group 435 (1).png","Group 435.png","SL-MK1.png","SL-MK2-removebg-preview.png","SL-MK2.png"],'members-only':["Group 436 (1).png","Group 436.png","WhatsApp_Image_2026-01-08_at_12.20.54_AM-removebg-preview.png","WhatsApp_Image_2026-01-08_at_12.21.06_AM-removebg-preview.png"]};
@@ -39,5 +39,13 @@ for(const product of fallbackProducts){
 export function colourName(hex:string){return ({'#171717':'Black','#efefeb':'Off white','#b82025':'Red','#1769bb':'Blue','#8a7161':'Brown'} as Record<string,string>)[hex]||hex;}
 
 export const money = (amount:number) => new Intl.NumberFormat('en-NG',{style:'currency',currency:'NGN',maximumFractionDigits:0}).format(amount);
-// TODO: Replace contact placeholders with confirmed client details.
-export const contact = {address:'[Boutique Address], Warri, Delta State, Nigeria',phone:'+234 000 000 0000',email:'hello@[brandname].com',instagram:'@[brandname]',tiktok:'@[brandname]'};
+// Contact and social details transcribed from the supplied SL Originals flyer.
+export const contact = {
+ whatsappNumber:'2348149425448',
+ phone:'+234 814 942 5448',
+ instagram:'SL_Originals001',
+ snapchat:'SL_originals',
+ instagramUrl:'https://www.instagram.com/sl_originals001/',
+ snapchatUrl:'https://www.snapchat.com/add/SL_originals',
+ whatsappUrl:'https://wa.me/2348149425448'
+};

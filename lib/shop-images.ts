@@ -1,4 +1,4 @@
-import type {CSSProperties} from 'react';
+﻿import type {CSSProperties} from 'react';
 import overrides from './shop-image-overrides.json';
 import cards from './shop-card-images.json';
 type Override={source?:string;mask?:string};

@@ -1,4 +1,4 @@
-import {Detail} from '@/components/product-detail';
+﻿import {Detail} from '@/components/product-detail';
 import {getProducts} from '@/lib/products';
 import {notFound} from 'next/navigation';
 export async function generateStaticParams(){return (await getProducts()).map(product=>({slug:product.slug}))}

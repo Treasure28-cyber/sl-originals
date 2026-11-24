@@ -29,3 +29,20 @@ Shop filters use `/shop?category=Tees` (and equivalent categories), with `sort=l
 Product card canvases are pure white. Background-cleaned assets and masks live in `public/products/white`; originals remain untouched. Overrides are in `lib/shop-image-overrides.json`. Most cleaned products display the original pixels using a separate SVG background matte; four snapback views use inspected transparent cutouts for cleaner edges. Product and archive metadata now map by filenames instead of filesystem sort positions.
 
 Image editing used the built-in ImageGen tool. Prompt: remove only the background outside the supplied garment or cap, preserve all physical items, silhouettes, fabrics, colours, proportions, printed artwork and typography, and return a transparent cutout without added shadows or text. The masks were reviewed on white.
+## Join the Circle welcome popup
+
+The welcome dialog opens after 2.8 seconds for first-time browsers. Dismissal and successful signup are remembered in localStorage (`sl-circle-welcome-v1`); the footer's Join the Circle button always reopens it. The popup is an email signup, not an account login. It uses a native modal dialog for focus trapping and Escape dismissal and restores focus afterward.
+
+`POST /api/newsletter` validates first name, email, optional birthday month/day and explicit marketing consent. Year of birth is not collected. In development it saves one record per email in the git-ignored `.data/circle` folder. This is local development storage, not a production mailing-list service.
+
+For production, configure `SANITY_WRITE_TOKEN`, `NEXT_PUBLIC_SANITY_PROJECT_ID` and `SANITY_SUBSCRIBER_DATASET`. Create the subscriber dataset as PRIVATE, separate from the public catalogue, and add `sanity/circle-subscriber.ts` to its Studio schemas. Without configured subscriber storage, production returns an honest unavailable message rather than a false success. Email campaigns, double opt-in and unsubscribe delivery still require a connected email provider; the form only stores consented signups. The inline privacy disclosure describes this data collection. Confirm the client's final privacy text before launch.
+
+## Page entrance motion
+
+`components/page-motion.tsx` provides viewport-triggered Web Animations entrances across the shop, archive, product, story, contact, custom-order and checkout pages, plus homepage sections below the hero. Grid cards use a short stagger; split panels enter from opposite sides. The separate hero intro is preserved. New content is registered through a MutationObserver. Animation resources are cleaned up on navigation, keyboard focus reveals controls immediately, and reduced-motion preferences disable entrances. Without JavaScript or supported browser APIs, content is visible normally.
+
+## Navigation and responsive performance
+
+Page-level horizontal overflow is clipped without creating a scroll container that breaks sticky navigation. Grid children can shrink, long headings and contact text wrap, and tablet navigation has narrower spacing. Navbar and category links use Next.js prefetching; `app/loading.tsx` provides an immediate navigation fallback. Product routes are pre-rendered with 60-second revalidation and catalogue reads are request-deduplicated. Sanity is imported only when configured.
+
+All 31 catalogue card views use generated 560x700 WebP previews (about 0.93 MB total versus 20.7 MB for original input files). Full-resolution originals remain available on detail pages. `scripts/optimize-shop-images.cjs` rebuilds previews using the existing white-background masks. Popup and hero code are separate dynamic chunks. Page entrances take 420 ms with a short stagger. Use `npm run build` then `npm start` to assess production navigation; `npm run dev` includes on-demand compilation.

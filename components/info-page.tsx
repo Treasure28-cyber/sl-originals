@@ -1,8 +1,46 @@
 'use client';
+
 import Link from 'next/link';
-import {Product,money,contact,colourName} from '@/lib/data';
 import Image from 'next/image';
 import {useState} from 'react';
-import {ArrowUpRight,ArrowRight} from 'lucide-react';
+import {ArrowRight,ArrowUpRight,MessageCircle} from 'lucide-react';
+import {contact} from '@/lib/data';
 import {EditorialHero} from './editorial-hero';
-export function InfoPage({type}:{type:'about'|'contact'|'custom'}){const [submitted,setSubmitted]=useState(false);const [brief,setBrief]=useState('');if(type==='about')return <main className="section editorial-page"><EditorialHero variant="about"/><section className="about-intro" id="our-story"><div className="about-grid"><img src="/products/artwork.png" alt="Night Shift original graphic"/><div><h2>REAL IS RARE.</h2><p>SL ORIGINALS is a streetwear label with an independent spirit. A space for bold graphics, expressive silhouettes and people who make their own way.</p><p>From Warri to wherever your story takes you. Wear your point of view.</p><p className="muted">Brand story preview — full story coming soon.</p><Link href="/shop" className="button">EXPLORE THE COLLECTION <ArrowUpRight size={19}/></Link></div></div></section></main>;return <main className="section info-page editorial-page"><EditorialHero variant={type==='custom'?'custom':'contact'}/><div className="info-grid" id={type==='custom'?'custom-brief':'contact-details'}><div><h2>{type==='custom'?'An original, made for you.':'Good conversations start here.'}</h2><p>{type==='custom'?'Tell us what you have in mind. A single statement piece, a team collection or something completely different.':'Questions about a piece, your order or a collaboration We’d love to hear from you.'}</p><div className="contact-block"><small>VISIT THE BOUTIQUE</small><p>{contact.address}</p><small>PHONE / WHATSAPP</small><p>{contact.phone}</p><small>EMAIL</small><p>{contact.email}</p><small>SOCIAL</small><p>Instagram {contact.instagram} · TikTok {contact.tiktok}</p></div></div><form onSubmit={e=>{e.preventDefault();setSubmitted(true)}}><label>Your name<input required name="name" placeholder="Full name"/></label><label>Email address<input required name="email" type="email" placeholder="you@example.com"/></label>{type==='custom'&&<div className="form-row"><label>Piece<select name="piece"><option>Graphic tee</option><option>Tracksuit / set</option><option>Headwear</option><option>Other</option></select></label><label>Quantity<input required type="number" min="1" defaultValue="1" name="quantity"/></label></div>}<label>{type==='custom'?'Tell us your idea':'Your message'}<textarea required minLength={10} value={brief} onChange={e=>{setBrief(e.target.value);setSubmitted(false)}} placeholder="The details, the inspiration, the vision…" rows={5}/></label>{type==='custom'&&<label>Reference link (optional)<input type="url" name="reference" placeholder="https://drive.google.com/…"/></label>}<button className="button">PREPARE {type==='custom'?'REQUEST':'MESSAGE'} <ArrowUpRight size={18}/></button><p className="muted">Contact details are awaiting confirmation. You can prepare and copy your message below.</p>{submitted&&<div className="form-result" role="status"><strong>Your message is ready.</strong><p>{brief}</p><button type="button" className="text-link" onClick={async()=>{await navigator.clipboard.writeText(brief);setSubmitted(false)}}>COPY MESSAGE <ArrowRight size={16}/></button><p>Send it once the brand’s contact details are confirmed.</p></div>}</form></div></main>}
+
+export function InfoPage({type}:{type:'about'|'contact'|'custom'}){
+ const [submitted,setSubmitted]=useState(false);
+ const [brief,setBrief]=useState('');
+ if(type==='about')return <main className="section editorial-page">
+  <EditorialHero variant="about"/>
+  <section className="about-intro" id="our-story"><div className="about-grid">
+   <Image width={900} height={1100} src="/products/artwork.png" alt="SL Originals Night Shift graphic artwork"/>
+   <div><h2>REAL IS RARE.</h2><p>SL Originals makes statement streetwear rooted in Warri, Delta State.</p><p>Built for people who move their own way. Warri roots. Worldwide mindset.</p><Link href="/shop" className="button">SHOP THE COLLECTION <ArrowUpRight size={19}/></Link></div>
+  </div></section>
+ </main>;
+
+ if(type==='custom')return <main className="section info-page editorial-page">
+  <EditorialHero variant="custom"/>
+  <div className="info-grid custom-order-content" id="custom-brief">
+   <div><h2>Bring the idea. We’ll talk through the rest.</h2><p>Custom pieces for crews, events, birthdays, churches and schools. Share what you have in mind; we’ll confirm options, quantity, pricing and timing before you commit.</p>
+    <ol className="custom-order-steps"><li><b>01</b><span>Send your idea and any reference images.</span></li><li><b>02</b><span>Discuss design, quantity, price and timing.</span></li><li><b>03</b><span>Approve the details before production begins.</span></li></ol>
+    <a className="button custom-whatsapp-button" href={`${contact.whatsappUrl}?text=${encodeURIComponent('Hi SL Originals, I’m interested in a custom order. I’d like to make something for my crew, event or occasion. Please let me know what details you need.')}`} target="_blank" rel="noreferrer"><MessageCircle size={18}/> START A CUSTOM ORDER</a>
+   </div>
+   <div className="contact-block"><small>WHATSAPP</small><p><a href={contact.whatsappUrl}>{contact.phone}</a></p><small>INSTAGRAM</small><p><a href={contact.instagramUrl}>@{contact.instagram}</a></p></div>
+  </div>
+ </main>;
+
+ return <main className="section info-page editorial-page">
+  <EditorialHero variant="contact"/>
+  <div className="info-grid" id="contact-details">
+   <div><h2>Talk to SL Originals.</h2><p>Questions about a piece, an order or a collaboration? Reach us through WhatsApp or social media.</p>
+    <div className="contact-block"><small>PHONE / WHATSAPP</small><p><a href={contact.whatsappUrl}>{contact.phone}</a></p><small>INSTAGRAM</small><p><a href={contact.instagramUrl}>@{contact.instagram}</a></p><small>SNAPCHAT</small><p><a href={contact.snapchatUrl}>{contact.snapchat}</a></p></div>
+   </div>
+   <form onSubmit={event=>{event.preventDefault();setSubmitted(true)}}>
+    <label>Your message<textarea required minLength={10} value={brief} onChange={event=>{setBrief(event.target.value);setSubmitted(false)}} placeholder="What would you like to ask?" rows={5}/></label>
+    <button className="button">PREPARE MESSAGE <ArrowUpRight size={18}/></button>
+    <p className="muted">This form prepares a message to copy. It does not send to an inbox.</p>
+    {submitted&&<div className="form-result" role="status"><strong>Your message is ready.</strong><p>{brief}</p><button type="button" className="text-link" onClick={async()=>{await navigator.clipboard.writeText(brief);setSubmitted(false)}}>COPY MESSAGE <ArrowRight size={16}/></button></div>}
+   </form>
+  </div>
+ </main>;
+}
