@@ -37,7 +37,7 @@ export function ProductCard({product}:{product:Product}){
    </div>
    <div className="product-meta"><div><small>{product.category}</small><h3>{product.name}</h3>{!comingSoon&&<span className="product-card-price">{money(product.price)}</span>}</div></div>
   </Link>
-  {!comingSoon&&<a className="product-whatsapp-link" href={orderUrl} target="_blank" rel="noreferrer">ORDER ON WHATSAPP <ArrowUpRight size={15}/></a>}
+  {!comingSoon&&<a className="product-whatsapp-link" href={orderUrl} target="_blank" rel="noreferrer">ORDER NOW <ArrowUpRight size={15}/></a>}
   {paired&&<button type="button" className="card-slideshow-control" aria-label={`${paused?'Play':'Pause'} automatic views of ${product.name}`} aria-pressed={paused} onClick={()=>setPaused(value=>!value)}>{paused?<Play size={14}/>:<Pause size={14}/>}<span>{paused?'Play views':'Pause views'}</span></button>}
  </article>
 }

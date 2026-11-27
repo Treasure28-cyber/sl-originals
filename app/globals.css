@@ -474,8 +474,8 @@ header.glass-header-overlay~main{margin-top:-116px}
 .product-meta>div{min-width:0}
 .product-meta h3{font-size:15px;line-height:1.35;margin-top:7px}
 .product-card-price{display:block;font-size:16px;font-weight:700;letter-spacing:-.2px;margin-top:8px;color:var(--white)}
-.product-whatsapp-link{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px;padding:11px 12px;border:1px solid #b82025;color:#b82025;font-size:9px;font-weight:700;letter-spacing:.6px}
-.product-whatsapp-link:hover{background:#b82025;color:#fff}
+.product-whatsapp-link{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px;padding:11px 12px;border:1px solid #b82025;background:#b82025;color:#fff;font-size:9px;font-weight:700;letter-spacing:.6px;transition:background .2s,color .2s,border-color .2s}
+.product-whatsapp-link:hover{background:#fff;color:#b82025;border-color:#b82025}
 .whatsapp-detail-button{width:100%;justify-content:center;margin-top:12px;background:#b82025;gap:10px}
 .availability-note{margin:18px 0;padding:13px 15px;background:#f5f5f7;border-left:3px solid #b82025;line-height:1.6}
 .home-trust-strip{padding:21px 4%;background:#f5f5f7;border:0;justify-content:space-between;flex-wrap:wrap}
