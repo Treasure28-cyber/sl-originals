@@ -1,3 +1,5 @@
 import {contact} from '@/lib/data';
 import {Checkout} from '@/components/checkout';
+import type {Metadata} from 'next';
+export const metadata:Metadata={title:'Checkout',robots:{index:false,follow:false}};
 export default function Page(){return <Checkout paystackEnabled={process.env.CHECKOUT_ENABLED==='true'&&!!process.env.PAYSTACK_SECRET_KEY&&!!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID&&!!process.env.NEXT_PUBLIC_SITE_URL} whatsappNumber={process.env.NEXT_PUBLIC_WHATSAPP_NUMBER||contact.whatsappNumber}/>}
