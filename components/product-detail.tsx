@@ -48,7 +48,6 @@ export function Detail({product,products}:{product:Product;products:Product[]}){
     {error&&<p role="alert" className="error">{error}</p>}
     {!comingSoon&&<button className="button add-button" onClick={()=>{if(!size){setError('Choose your size first.');return}cart.add(product,size,color)}}>ADD TO BAG <Plus size={20}/></button>}
     <a className="button whatsapp-detail-button" href={orderUrl} target="_blank" rel="noreferrer"><MessageCircle size={18}/>{comingSoon?'ASK ABOUT THIS DESIGN':'ORDER ON WHATSAPP'}</a>
-    {!comingSoon&&<p className="catalogue-note">Preview price shown in NGN. Confirm the current price, availability and delivery with us before ordering.</p>}
     <div className="product-accordions">
      {[
       ['THE DETAILS','Product fabric, fit and care details are being finalized. Message us for current information.'],

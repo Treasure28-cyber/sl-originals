@@ -17,8 +17,8 @@ nav a:hover,nav a.active{color:#1d1d1f}
 .hero-description{color:#6e6e73}
 .hero-bottom{border-color:#e5e5e7}
 .button,.badge,.selected{background:#1d1d1f!important;color:#fff!important}
-.button{border-radius:999px}
-.button:hover{background:#424245!important}
+.button{border-radius:0;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.button:hover{background:#fff!important;color:#b82025!important;outline:1px solid #b82025;outline-offset:-1px}
 .button.dark{background:#1d1d1f;color:#fff}
 .text-link:hover{color:#515154}
 .ticker{background:#f5f5f7;color:#1d1d1f;border-block:1px solid #e5e5e7}
@@ -266,6 +266,12 @@ header.glass-header-home~main{margin-top:-116px}
  .campaign-bottom>span:nth-of-type(2){display:none}
  .campaign-replay{font-size:9px;letter-spacing:.7px;padding-left:6px}
 }
+
+/* Shared clipped red CTA for the navbar pages at every viewport width. */
+.shop-page .editorial-hero .shop-campaign-bottom .shop-campaign-cta,
+main.editorial-page:not(.archive-page) .editorial-hero .shop-campaign-bottom .shop-campaign-cta{display:inline-flex;align-items:center;justify-content:center;width:max-content;max-width:100%;min-height:44px;padding:11px 14px;border:1px solid #b82025;border-radius:0;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);background:#b82025;color:#fff;font-size:10px;font-weight:700;letter-spacing:.5px;text-decoration:none;box-shadow:0 6px 16px #0003}
+.shop-page .editorial-hero .shop-campaign-bottom .shop-campaign-cta:hover,
+main.editorial-page:not(.archive-page) .editorial-hero .shop-campaign-bottom .shop-campaign-cta:hover{background:#fff;color:#b82025;border-color:#b82025}
 @media(prefers-reduced-motion:reduce){
  .campaign-hero-animated .campaign-scene *,.campaign-hero-animated .campaign-bottom{animation:none!important}
  .campaign-replay{display:none}
@@ -468,13 +474,18 @@ header.glass-header-overlay~main{margin-top:-116px}
 
 /* Nigerian storefront polish: brand red, direct ordering and a compact shop opening. */
 :root{--accent:#b82025}
-.button:hover{background:#941a1e}
+.button{background:#b82025!important;color:#fff!important;border:1px solid #b82025;border-radius:0;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.button:hover{background:#fff!important;color:#b82025!important;border-color:#b82025;outline:none}
 .product-card-link{display:block}
+.product-card{display:flex;flex-direction:column;height:100%}
+.product-card-link{flex:1;display:flex;flex-direction:column;min-height:0}
+.product-card-link>.product-image{flex-shrink:0}
+.product-card-link>.product-meta{margin-top:auto}
 .product-meta{display:block}
 .product-meta>div{min-width:0}
 .product-meta h3{font-size:15px;line-height:1.35;margin-top:7px}
 .product-card-price{display:block;font-size:16px;font-weight:700;letter-spacing:-.2px;margin-top:8px;color:var(--white)}
-.product-whatsapp-link{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px;padding:11px 12px;border:1px solid #b82025;background:#b82025;color:#fff;font-size:9px;font-weight:700;letter-spacing:.6px;transition:background .2s,color .2s,border-color .2s}
+.product-whatsapp-link{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:0;padding:11px 12px;border:1px solid #b82025;background:#b82025;color:#fff;font-size:9px;font-weight:700;letter-spacing:.6px;transition:background .2s,color .2s,border-color .2s;border-radius:0 0 10px 10px}
 .product-whatsapp-link:hover{background:#fff;color:#b82025;border-color:#b82025}
 .whatsapp-detail-button{width:100%;justify-content:center;margin-top:12px;background:#b82025;gap:10px}
 .availability-note{margin:18px 0;padding:13px 15px;background:#f5f5f7;border-left:3px solid #b82025;line-height:1.6}
@@ -575,6 +586,17 @@ main.editorial-page:not(.archive-page) .editorial-hero .shop-campaign-ticket img
 }
 @media(prefers-reduced-motion:reduce){.card-slideshow-control{display:none}}
 
+/* Keep every product order action on a shared card baseline at all sizes. */
+.product-card{display:flex;flex-direction:column;height:100%}
+.product-card-link{display:flex;flex:1 1 auto;flex-direction:column;min-height:0}
+.product-card-link>.product-meta{margin-top:auto}
+.product-whatsapp-link{margin-top:0;border-radius:0 0 10px 10px}
+.product-image>.rareform-signature-badge{top:16px;left:16px}
+@media(max-width:700px){
+ .mobile-hidden-product{display:none!important}
+ .product-image>.rareform-signature-badge{top:10px;left:10px}
+}
+
 /* Mobile navbar heroes follow the compact dark reference; desktop styles above stay unchanged. */
 @media(max-width:700px){
  .shop-page>.editorial-hero,
@@ -626,8 +648,8 @@ main.editorial-page:not(.archive-page) .editorial-hero .shop-campaign-ticket img
 @media(max-width:700px){
  .shop-page>.editorial-hero{min-height:100svh;background:#101010!important;color:#fff!important}
  .shop-page>.editorial-hero::before{background:radial-gradient(ellipse at 48% 18%,#ffffff1b,transparent 44%),linear-gradient(145deg,#242426 0%,#111112 48%,#080809 100%)!important}
- .shop-page .editorial-hero .shop-campaign-bottom .shop-campaign-cta,
- main.editorial-page:not(.archive-page) .editorial-hero .shop-campaign-bottom .shop-campaign-cta{display:inline-flex;align-items:center;justify-content:center;width:max-content;max-width:100%;min-height:44px;padding:11px 14px;border:1px solid #b82025;border-bottom:1px solid #b82025;border-radius:3px;background:#b82025;color:#fff;font-size:10px;font-weight:700;letter-spacing:.5px;text-decoration:none;box-shadow:0 6px 16px #0003}
+.shop-page .editorial-hero .shop-campaign-bottom .shop-campaign-cta,
+main.editorial-page:not(.archive-page) .editorial-hero .shop-campaign-bottom .shop-campaign-cta{display:inline-flex;align-items:center;justify-content:center;width:max-content;max-width:100%;min-height:44px;padding:11px 14px;border:1px solid #b82025;border-bottom:1px solid #b82025;border-radius:0;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);background:#b82025;color:#fff;font-size:10px;font-weight:700;letter-spacing:.5px;text-decoration:none;box-shadow:0 6px 16px #0003}
  .shop-page .editorial-hero .shop-campaign-bottom .shop-campaign-cta:hover,
- main.editorial-page:not(.archive-page) .editorial-hero .shop-campaign-bottom .shop-campaign-cta:hover{background:#941a1e;border-color:#941a1e}
+ main.editorial-page:not(.archive-page) .editorial-hero .shop-campaign-bottom .shop-campaign-cta:hover{background:#fff;border-color:#b82025;color:#b82025}
 }

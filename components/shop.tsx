@@ -15,5 +15,4 @@ return <main className="section shop-page"><EditorialHero variant="shop"/>
 <div className="result-count" role="status"><span className="catalogue-count">{shown.length} {selectedCategory==='All'?'ORIGINAL PIECES':selectedCategory.toUpperCase()}</span><span>DESIGNS FROM THE ORIGINALS COLLECTION</span></div>
 <div className="product-grid">{shown.map(p=><ProductCard key={p.id} product={p}/>)}</div>
 {shown.length===0&&<div className="empty"><h2>No pieces in this collection yet.</h2><a href="/shop" className="button">VIEW ALL PIECES</a></div>}
-<p className="catalogue-note">Preview prices are shown in NGN. Confirm the current price, availability and delivery with us on WhatsApp before ordering.</p>
 <section className="studio-invite"><div><p className="eyebrow">MADE FOR YOUR PEOPLE</p><h2>HAVE AN IDEA?</h2><p>Ask about custom pieces for your crew, event or occasion.</p></div><Link href="/custom-order" className="button">START A CUSTOM ORDER</Link></section></main>}
