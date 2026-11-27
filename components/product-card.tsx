@@ -32,7 +32,7 @@ export function ProductCard({product}:{product:Product}){
     <img className="primary-product-image" loading="lazy" decoding="async" src={shopImage(primarySource)} style={shopImageStyle(primarySource)} alt={`${product.name}${paired?' front view':''}`}/>
     {paired&&<img className="back-product-image" loading="lazy" decoding="async" src={shopImage(product.back!)} style={shopImageStyle(product.back!)} alt={`${product.name} back view`}/>}
     <span className="image-hint">VIEW DETAILS</span>
-    {(product.badge||comingSoon)&&<span className="badge">{comingSoon?'COMING SOON':product.badge}</span>}
+    {(product.badge||comingSoon)&&<span className={`badge ${product.slug==='rareform-99'?'rareform-signature-badge':''}`}>{comingSoon?'COMING SOON':product.badge}</span>}
     <span className="card-arrow" aria-hidden="true"><ArrowUpRight size={18}/></span>
    </div>
    <div className="product-meta"><div><small>{product.category}</small><h3>{product.name}</h3>{!comingSoon&&<span className="product-card-price">{money(product.price)}</span>}</div></div>
